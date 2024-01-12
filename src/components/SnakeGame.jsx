@@ -1,7 +1,6 @@
-// SnakeGame.js
 import React, { useState, useEffect, useRef } from 'react';
 import './SnakeGame.css';
-import backgroundMusic from './music.mp3'; // Adjust if the public folder is at the root
+import backgroundMusic from './music.mp3';
 
 const SnakeGame = () => {
   const canvasRef = useRef(null);
@@ -33,11 +32,9 @@ const SnakeGame = () => {
 
       const newSnake = moveSnake(snake, direction);
 
-      // Check for collisions
       if (isCollidingWithWall(newSnake[0]) || isCollidingWithSelf(newSnake)) {
         setIsGameOver(true);
 
-        // Update high score
         if (score > highScore) {
           setHighScore(score);
           localStorage.setItem('snakeHighScore', score.toString());
@@ -46,7 +43,6 @@ const SnakeGame = () => {
         return;
       }
 
-      // Check for collisions with food
       if (isCollidingWithFood(newSnake[0], food)) {
         setFood(generateRandomFood(newSnake));
         setSnake([...newSnake, { x: -1, y: -1 }]);
@@ -116,15 +112,51 @@ const SnakeGame = () => {
       }
     };
 
+    const handleTouchStart = (e) => {
+      const touchStartX = e.touches[0].clientX;
+      const touchStartY = e.touches[0].clientY;
+
+      window.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+
+        const touchEndX = e.touches[0].clientX;
+        const touchEndY = e.touches[0].clientY;
+
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+          if (deltaX > 0 && direction !== 'LEFT') {
+            setDirection('RIGHT');
+          } else if (deltaX < 0 && direction !== 'RIGHT') {
+            setDirection('LEFT');
+          }
+        } else {
+          if (deltaY > 0 && direction !== 'UP') {
+            setDirection('DOWN');
+          } else if (deltaY < 0 && direction !== 'DOWN') {
+            setDirection('UP');
+          }
+        }
+      });
+
+      window.addEventListener('touchend', () => {
+        window.removeEventListener('touchmove', handleTouchMove);
+        window.removeEventListener('touchend', handleTouchEnd);
+      });
+    };
+
     window.addEventListener('keydown', handleKeyPress);
+    window.addEventListener('touchstart', handleTouchStart);
 
     backgroundMusicRef.current.play();
 
-    const intervalId = setInterval(gameLoop, 75); // Adjust the interval as needed
+    const intervalId = setInterval(gameLoop, 75);
 
     return () => {
       clearInterval(intervalId);
       window.removeEventListener('keydown', handleKeyPress);
+      window.removeEventListener('touchstart', handleTouchStart);
     };
   }, [snake, food, direction, isGameOver, score, highScore]);
 
