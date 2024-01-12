@@ -1,41 +1,48 @@
-/* SnakeGame.css */
 body {
     min-height: 100vh;
-    background-size: 100vw 100vh;
+    background-size: cover;
     background-repeat: no-repeat;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     background-image: url(2.jpg);
     font-family: 'PressStart2P', sans-serif;
-  }
-  @font-face {
-  
-    font-family: 'PressStart2P';
-    src: url(../PressStart2P.ttf)
-  
 }
-  canvas {
+
+@font-face {
+    font-family: 'PressStart2P';
+    src: url(../PressStart2P.ttf);
+}
+
+canvas {
     border: 1px solid #ddd;
-    font-family: 'PressStart2P', sans-serif; /* Apply the font to the canvas */
-  }
-  
-  .game-container {
+    font-family: 'PressStart2P', sans-serif;
+    max-width: 100%; /* Make the canvas responsive */
+    height: auto; /* Allow the canvas to scale proportionally */
+}
+
+.game-container {
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-left: 0; /* Adjust margin as needed */
-    position: relative; /* Added position: relative; */
-    
-  }
-  
-  .right-image {
+    justify-content: center; /* Center the game container */
+    align-items: center;
+    margin: 0 auto; /* Center the game container horizontally */
     position: relative;
-    top: 80px;
-    left: 120px;
-    width: 400px; /* Adjust the width as needed */
-    height: 1200px; /* Adjust the height as needed */
-    max-height: 100px; /* Adjust the max-height as needed */
-    font-family: 'PressStart2P', sans-serif; /* Apply the font to the right image */
-  }
-  
+}
+
+.right-image {
+    display: none; /* Hide the right image on small screens */
+}
+
+/* Add media query for small screens */
+@media only screen and (min-width: 768px) {
+    .right-image {
+        display: block; /* Show the right image on larger screens */
+        position: absolute;
+        top: 80px;
+        left: 120px;
+        width: 400px;
+        height: 1200px;
+        max-height: 100px;
+        font-family: 'PressStart2P', sans-serif;
+    }
+}
