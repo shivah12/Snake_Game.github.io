@@ -1,0 +1,41 @@
+/* SnakeGame.css */
+body {
+    min-height: 100vh;
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-image: url(2.jpg);
+    font-family: 'PressStart2P', sans-serif;
+  }
+  @font-face {
+  
+    font-family: 'PressStart2P';
+    src: url(../PressStart2P.ttf)
+  
+}
+  canvas {
+    border: 1px solid #ddd;
+    font-family: 'PressStart2P', sans-serif; /* Apply the font to the canvas */
+  }
+  
+  .game-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 0; /* Adjust margin as needed */
+    position: relative; /* Added position: relative; */
+    
+  }
+  
+  .right-image {
+    position: relative;
+    top: 80px;
+    left: 120px;
+    width: 400px; /* Adjust the width as needed */
+    height: 1200px; /* Adjust the height as needed */
+    max-height: 100px; /* Adjust the max-height as needed */
+    font-family: 'PressStart2P', sans-serif; /* Apply the font to the right image */
+  }
+  
