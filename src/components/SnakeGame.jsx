@@ -167,7 +167,7 @@ const SnakeGame = () => {
       <div className="game-container">
         <canvas ref={canvasRef} width={700} height={550} className={isGameOver ? 'game-over' : ''} />
         <div className='right-image'>
-          @shreeti2024
+          
         </div>
       </div>
     </div>
